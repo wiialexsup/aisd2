@@ -3,7 +3,7 @@ import time
 import matplotlib.pyplot as plt
 
 
-# 1. Реализация бинарного дерева поиска (BST)
+
 class Node:
     def __init__(self, key):
         self.left = None
@@ -44,7 +44,7 @@ class BinarySearchTree:
         return max(left_height, right_height) + 1
 
 
-# 2. Реализация АВЛ-дерева
+
 class AVLNode:
     def __init__(self, key):
         self.key = key
@@ -73,20 +73,20 @@ class AVLTree:
 
         balance = self._get_balance(root)
 
-        # Левый левый случай
+        
         if balance > 1 and key < root.left.key:
             return self._right_rotate(root)
 
-        # Правый правый случай
+    
         if balance < -1 and key > root.right.key:
             return self._left_rotate(root)
 
-        # Левый правый случай
+
         if balance > 1 and key > root.left.key:
             root.left = self._left_rotate(root.left)
             return self._right_rotate(root)
 
-        # Правый левый случай
+
         if balance < -1 and key < root.right.key:
             root.right = self._right_rotate(root.right)
             return self._left_rotate(root)
@@ -131,14 +131,14 @@ class AVLTree:
         return self._get_height(self.root)
 
 
-# 3. Реализация Красно-черного дерева
+
 class RedBlackNode:
     def __init__(self, key):
         self.key = key
         self.left = None
         self.right = None
         self.parent = None
-        self.color = 'red'  # Новый узел всегда красный
+        self.color = 'red'  
 
 
 class RedBlackTree:
@@ -257,7 +257,7 @@ class RedBlackTree:
         return max(left_height, right_height) + 1
 
 
-# 4. Тестирование и сбор данных
+
 def test_tree(tree_class, n, runs=10):
     total_height = 0
     total_time = 0
@@ -276,7 +276,7 @@ def test_tree(tree_class, n, runs=10):
     return avg_height, avg_time
 
 
-# 5. Генерация графиков
+
 sizes = [1,10,20,30, 40, 50, 90,100,150, 200,250, 300,350, 400,450, 500,550,600,650,700,750, 800,850,900,950,1000, 1024]
 bst_heights = []
 avl_heights = []
@@ -284,7 +284,7 @@ rbt_heights = []
 
 with open("tree_heights.txt", "w") as f:
     f.write("Size,BST Height, AVL Height, Red-Black Tree Height\n")
-# Сбор данных для каждого дерева
+
     for size in sizes:
         bst_height, _ = test_tree(BinarySearchTree, size)
         avl_height, _ = test_tree(AVLTree, size)
@@ -295,7 +295,7 @@ with open("tree_heights.txt", "w") as f:
         bst_heights.append(bst_height)
         f.write(f"{size},{bst_height} {avl_height}, {rbt_height}\n")
 
-# Построение графиков
+
 plt.figure(figsize=(10, 6))
 
 plt.plot(sizes, bst_heights, label='Binary Search Tree (BST)', marker='o')
